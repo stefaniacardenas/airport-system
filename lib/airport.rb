@@ -1,5 +1,7 @@
 class Airport
 
+CAPACITY = 20
+
 	def initialize(planes = [])
 		@planes = planes
 	end
@@ -8,7 +10,12 @@ class Airport
 		@planes.any?
 	end
 
+	def full?
+		@planes.count >= CAPACITY
+	end
+
 	def allow_landing(plane)
+		raise "This Airport is full" if full?
 		raise "This flight cannot land due to weather conditions" if weather_stormy?
 		plane.landed!
 		@planes << plane
