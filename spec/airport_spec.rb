@@ -3,6 +3,7 @@ require "airport"
 describe Airport do
 	let(:airport) {Airport.new}
 
+
 		it "has no planes when new" do
 			expect(airport).not_to have_plane
 		end  
@@ -15,6 +16,8 @@ describe Airport do
 		it "is not full when created" do 
 			expect(airport).not_to be_full
 		end
+
+
 
 	context "Traffic control" do
 		let(:plane) {double :plane, landed!: :false}
@@ -48,6 +51,9 @@ describe Airport do
 			expect(airport).not_to have_plane
 		end
 	end
+
+
+
 
 	context "weather conditions" do
 

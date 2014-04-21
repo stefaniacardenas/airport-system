@@ -1,4 +1,8 @@
+require "weather"
+
 class Airport
+
+include Weather
 
 CAPACITY = 20
 
@@ -27,10 +31,6 @@ CAPACITY = 20
 		plane.take_off!
 	end
 
-	def weather_stormy?
-		sunny = false
-		stormy = true
-		[sunny, sunny, sunny, stormy].sample
-	end
+
 
 end
