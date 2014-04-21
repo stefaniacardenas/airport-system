@@ -1,11 +1,11 @@
 require "airport"
 
 describe Airport do
+	let(:airport) {Airport.new}
 
 	context "Airport features" do
-
 		it "has no planes when new" do
-			expect(Airport.new).not_to have_plane
+			expect(airport).not_to have_plane
 		end  
 
 		it "can be created with planes" do 
@@ -15,52 +15,50 @@ describe Airport do
 	end
 
 	context "Traffic control" do
+		let(:plane) {double :plane, landed!: :false}
+		
+		before do
+			airport.stub(:weather_stormy?).and_return(false)
+		end
 
 		it "can accept a landing plane" do 
 			plane = double :plane 
-			airport = Airport.new([plane])
-			airport.stub(:weather_stormy?).and_return(false)
+			expect(plane).to receive(:landed!)
 			airport.allow_landing(plane)
-	end
+	  end
 
 		it "has planes after they land" do
-			plane = double :plane 
-			airport = Airport.new([plane])
-			airport.stub(:weather_stormy?).and_return(false)
 			airport.allow_landing(plane)
 			expect(airport).to have_plane
 		end
 
 			it "can allow a plane to depart" do
-			plane = double :plane 
-			airport = Airport.new([plane])
-			airport.allow_departure(plane)
+			airport.allow_landing(plane)
+			expect(plane).to receive(:take_off!)
+			airport.allow_departure
+
 		end
 
 			it "doesn't have planes after they depart" do
-			plane = double :plane 
-			airport = Airport.new([plane])
-			airport.allow_departure(plane)
 			expect(airport).not_to have_plane
 		end
 	end
 
 	context "weather conditions" do
 
-		it "cannot allow landing if weather is stormy" do 
-			airport = Airport.new
+		before do
 			airport.stub(:weather_stormy?).and_return(true)
-			expect(airport.weather_stormy?).to be_true
+		end
+
+		it "cannot allow landing if weather is stormy" do 
 			expect{airport.allow_landing(:plane)}.to raise_error(RuntimeError)
 		end
 
 		it "cannot allow departure if weather is stormy" do 
-			airport = Airport.new
-			airport.stub(:weather_stormy?).and_return(true)
-			expect(airport.weather_stormy?).to be_true
-			expect{airport.allow_departure(:plane)}.to raise_error(RuntimeError)
+			expect{airport.allow_departure}.to raise_error(RuntimeError)
 		end
 
 	end
 
 end
+

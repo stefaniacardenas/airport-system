@@ -10,16 +10,20 @@ class Airport
 
 	def allow_landing(plane)
 		raise "This flight cannot land due to weather conditions" if weather_stormy?
+		plane.landed!
 		@planes << plane
 	end
 
-	def allow_departure(plane)
+	def allow_departure
 		raise "This flight cannot depart due to weather conditions" if weather_stormy?
-		@planes.pop
+		plane=@planes.pop
+		plane.take_off!
 	end
 
 	def weather_stormy?
-		[false, false, false, true].sample
+		sunny = false
+		stormy = true
+		[sunny, sunny, sunny, stormy].sample
 	end
 
 end
