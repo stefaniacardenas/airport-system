@@ -1,10 +1,10 @@
-require "weather"
+require_relative "weather"
 
 class Airport
 
-include Weather
+	include Weather
 
-CAPACITY = 20
+	CAPACITY = 20
 
 	def initialize(planes = [])
 		@planes = planes
