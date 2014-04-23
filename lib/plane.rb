@@ -8,10 +8,11 @@ class Plane
 		@flying = false
 	end
 
+	# what is status used for?
 	def status
-		if flying! 
+		if flying!
 			puts 'Flying'
-		else 
+		else
 			puts 'Landed'
 		end
 	end

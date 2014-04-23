@@ -18,9 +18,12 @@ class Airport
 		@planes.count >= CAPACITY
 	end
 
+	# allow landing sounds like a question.
 	def allow_landing(plane)
 		raise "This Airport is full" if full?
 		raise "This flight cannot land due to weather conditions" if weather_stormy?
+		# check your language, landed sounds like a question rather than a command
+		# what about "land!" ?
 		plane.landed!
 		@planes << plane
 	end
