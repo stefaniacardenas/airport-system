@@ -3,7 +3,6 @@ require "airport"
 describe Airport do
 	let(:airport) {Airport.new}
 
-
 		it "has no planes when new" do
 			expect(airport).not_to have_plane
 		end  
@@ -16,8 +15,6 @@ describe Airport do
 		it "is not full when created" do 
 			expect(airport).not_to be_full
 		end
-
-
 
 	context "Traffic control" do
 		let(:plane) {double :plane, landed!: :false}
@@ -41,22 +38,18 @@ describe Airport do
 			expect(airport).to have_plane
 		end
 
-			it "can allow a plane to depart" do
+		it "can allow a plane to depart" do
 			airport.allow_landing(plane)
 			expect(plane).to receive(:take_off!)
 			airport.allow_departure
 		end
 
-			it "doesn't have planes after they depart" do
+		it "doesn't have planes after they depart" do
 			expect(airport).not_to have_plane
 		end
 	end
 
-
-
-
 	context "weather conditions" do
-
 		before do
 			airport.stub(:weather_stormy?).and_return(true)
 		end
@@ -69,5 +62,6 @@ describe Airport do
 			expect{airport.allow_departure}.to raise_error(RuntimeError)
 		end
 	end
+
 end
 

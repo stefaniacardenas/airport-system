@@ -1,7 +1,7 @@
 class Plane
 
 	def flying!
-		@flying =true
+		@flying = true
 	end
 
 	def landed!
@@ -15,4 +15,5 @@ class Plane
 			puts 'Landed'
 		end
 	end
+	
 end
